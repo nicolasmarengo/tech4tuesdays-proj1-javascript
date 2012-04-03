@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>Create your Google Search Result</title>
+	<link rel="stylesheet" href="reset.css" type="text/css" />
+	<link rel="stylesheet" href="standard.css" type="text/css" />
+	<script type="text/javascript">
+		var titleLimit = 19;
+		var urlLimit = 50;
+		var descLimit = 159;
+		function load(){
+			//set the maxlength on the field and then add the number next to it
+			//tile
+			document.getElementById('inpTitle').setAttribute('maxlength',titleLimit);
+			document.getElementById('title_limit').innerHTML=titleLimit;
+			//URL
+			document.getElementById('inpUrl').setAttribute('maxlength',urlLimit);
+			document.getElementById('url_limit').innerHTML=urlLimit;
+			//description
+			document.getElementById('inpDesc').setAttribute('maxlength',descLimit);
+			document.getElementById('desc_limit').innerHTML=descLimit;
+		}
+		function fieldChange(input, output, counter){
+			//find all elements with the same class and add them to a variable
+			var allTexts = document.getElementsByClassName(output);
+			//loop through the elements on the variable and change the text on the divs
+			for(var i=0; i< allTexts.length; i++){
+				allTexts[i].innerHTML = document.getElementById(input).value;
+			}
+			//update the counter field next to the input 
+			document.getElementById(counter).innerHTML = document.getElementById(input).getAttribute("maxlength") - document.getElementById(input).value.length;
+		}
+		function changePreview(type){
+			//find all elements with the same name and add them to a variable
+			var allPreviews = document.getElementsByName('all-previews');
+			//loop through the elements on the variable and change the style off the divs to "disappear"
+			for(var i=0; i< allPreviews.length; i++){
+				allPreviews[i].setAttribute('style','display:none;');
+			}
+			//update the style of the chosen div thought the radio button so that it "re-appears"
+			document.getElementById('preview-'+type).setAttribute('style','display:block;');
+			//alert(type);
+		}
+	</script>
+</head>
+<body onload="load()">
+	<div id="wrapper">
+		<h1>Create your Google Search Result</h1>
+		<div id="form">
+			<form>
+				<div>
+					Enter your title:
+					<input type="text" onkeyup="fieldChange('inpTitle', 'desTitle', 'title_limit');" id="inpTitle" />
+					(<span id="title_limit"></span>)
+				</div>
+				<div>
+					Enter your url:
+					<input type="text" onkeyup="fieldChange('inpUrl', 'desUrl', 'url_limit');" id="inpUrl" />
+					(<span id="url_limit"></span>)
+				</div>
+				<div>
+					Enter your description:
+					<textarea onkeyup="fieldChange('inpDesc', 'desDesc', 'desc_limit');" id="inpDesc" /></textarea>
+					(<span id="desc_limit"></span>)
+				</div>
+				<div>
+					Choose a style:<br />
+					Normal
+					<input type="radio" onchange="changePreview('normal');" name="preview-type" value="normal" checked/>
+					- PDF
+					<input type="radio" onchange="changePreview('pdf');" name="preview-type" value="pdf" />
+					- YouTube
+					<input type="radio" onchange="changePreview('youtube');" name="preview-type" value="youtube" />
+					- Other
+					<input type="radio" onchange="changePreview('other');" name="preview-type" value="other" />
+				</div>
+			</form>
+		</div>
+		<div id="preview-normal" name="all-previews" class="preview">
+			<div class="desTitle">Arena Media - Partners for Now and Next</div>
+			<div class="desUrl">www.arena-media.co.uk/</div>
+			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+		</div>
+		<div id="preview-pdf" name="all-previews" class="preview" style="display:none;">
+			<div class="desPdfTitle">[PDF] <span class="desTitle">Arena Media - Partners for Now and Next</span></div>
+			<div class="desUrl">www.arena-media.co.uk/</div>
+			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+		</div>
+		<div id="preview-youtube" name="all-previews" class="preview" style="display:none;">
+			<div class="desVideoTitle">[VIDEO] <span class="desTitle">Arena Media - Partners for Now and Next</div>
+			<div class="desUrl">www.arena-media.co.uk/</div>
+			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+		</div>
+		<div id="preview-other" name="all-previews" class="preview" style="display:none;">
+			<div class="desOtherTitle">[OTHER] <span class="desTitle">Arena Media - Partners for Now and Next</div>
+			<div class="desUrl">www.arena-media.co.uk/</div>
+			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+		</div>
+	</div>
+</body>
+</html>
