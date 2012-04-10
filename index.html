@@ -1,20 +1,50 @@
 <html>
 <head>
-	<title>Create your Google Search Result</title>
-	<link rel="stylesheet" href="reset.css" type="text/css" />
+	<title>Testing Google SERPs</title>
 	<link rel="stylesheet" href="standard.css" type="text/css" />
 	<script type="text/javascript">
+	
+		// ========================================= //
+		// ======== CONFIG FOR STARTUP ============= //
+		// ========================================= //
+		
 		var limitsArray = {
 			title_limit:69, 
 			url_limit:50, 
 			desc_limit:159
 		};
+		var startingText = {
+			pageTitle:"Arena Media - Partners for Now and Next", 
+			urlDesc:"www.arena-media.co.uk/", 
+			metaDesc:"Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ..."
+		};
+		
+		/*
+			Implementing the config
+		*/
+		
 		function load(){
 			//set the number next to the input fields by looping through limitsArray
 			for (key in limitsArray) {
 				document.getElementById(key).innerHTML=limitsArray[key];
 				}
+			for (key in startingText) {
+					var allTexts = document.getElementsByClassName(key);
+					//loop through the elements on the allTexts variable and change the text on the divs
+					for(var i=0; i< allTexts.length; i++){
+						allTexts[i].innerHTML = startingText[key];
+					}
+				}
 		}
+		
+		// =========================================================== //
+		// ============= Functions for on page changes =============== //
+		// =========================================================== //
+		
+		/*
+			Input fields changing the text and counter on the side
+		*/
+		
 		function fieldChange(input, output, counter){
 			//find all elements with the same class and add them to a variable
 			var allTexts = document.getElementsByClassName(output);
@@ -25,17 +55,25 @@
 			}
 			//update the counter field next to the input 
 			document.getElementById(counter).innerHTML = limitsArray[counter] - document.getElementById(input).value.length;
-			if (document.getElementById(counter).innerHTML < 0){
+			if (document.getElementById(counter).innerHTML < 0 && input != "inpUrl"){
 				//looks for the location of the first space from the limit backwards
-				var findSpace = inputText.lastIndexOf(' ',limitsArray[counter]);
+				var findSpaceLocation = inputText.lastIndexOf(' ',limitsArray[counter]);
 				// Create a new variable using the inputText but only from the begining until the location found. Apend to this 3 dots.
-				var newText = inputText.substr(0,findSpace)+ " ...";
+				var newText = inputText.substr(0,findSpaceLocation)+ " ...";
 				//loop through the elements [AGAIN] on the allTexts variable and change the text on the divs to the newly created newText
 				for(var i=0; i< allTexts.length; i++){
 					allTexts[i].innerHTML = newText;
 				}
 			}
+			else{
+				//WHAT TO DO WITH THE URL???
+			}
 		}
+		
+		/*
+			Changing the viewing syle with the radio buttons
+		*/
+		
 		function changePreview(type){
 			//find all elements with the same name and add them to a variable
 			var allPreviews = document.getElementsByName('all-previews');
@@ -51,26 +89,26 @@
 </head>
 <body onload="load()">
 	<div id="wrapper">
-		<h1>Create your Google Search Result</h1>
+		<h1>Natural Search Copy Tool</h1>
 		<div id="form">
 			<form>
 				<div>
-					Enter your title:
-					<input type="text" onkeyup="fieldChange('inpTitle', 'desTitle', 'title_limit');" id="inpTitle" />
+					Page title:
+					<input type="text" onkeyup="fieldChange('inpTitle', 'pageTitle', 'title_limit');" id="inpTitle" />
 					(<span id="title_limit"></span>)
 				</div>
 				<div>
-					Enter your url:
-					<input type="text" onkeyup="fieldChange('inpUrl', 'desUrl', 'url_limit');" id="inpUrl" />
+					URL:
+					<input type="text" onkeyup="fieldChange('inpUrl', 'urlDesc', 'url_limit');" id="inpUrl" />
 					(<span id="url_limit"></span>)
 				</div>
 				<div>
-					Enter your description:
-					<textarea onkeyup="fieldChange('inpDesc', 'desDesc', 'desc_limit');" id="inpDesc" /></textarea>
+					Meta Description:
+					<textarea onkeyup="fieldChange('inpDesc', 'metaDesc', 'desc_limit');" id="inpDesc" /></textarea>
 					(<span id="desc_limit"></span>)
 				</div>
-				<div>
-					Choose a style:<br />
+				<div class="radioButtons">
+					Choose a style:
 					Normal
 					<input type="radio" onchange="changePreview('normal');" name="preview-type" value="normal" checked/>
 					- PDF
@@ -83,24 +121,24 @@
 			</form>
 		</div>
 		<div id="preview-normal" name="all-previews" class="preview">
-			<div class="desTitle">Arena Media - Partners for Now and Next</div>
-			<div class="desUrl">www.arena-media.co.uk/</div>
-			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+			<div class="pageTitle"></div>
+			<div class="urlDesc"></div>
+			<div class="metaDesc"></div>
 		</div>
 		<div id="preview-pdf" name="all-previews" class="preview" style="display:none;">
-			<div class="desPdfTitle">[PDF] <span class="desTitle">Arena Media - Partners for Now and Next</span></div>
-			<div class="desUrl">www.arena-media.co.uk/</div>
-			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+			<div class="pdfTitle">[PDF] <span class="pageTitle"></span></div>
+			<div class="urlDesc"></div>
+			<div class="metaDesc"></div>
 		</div>
 		<div id="preview-youtube" name="all-previews" class="preview" style="display:none;">
-			<div class="desVideoTitle">[VIDEO] <span class="desTitle">Arena Media - Partners for Now and Next</div>
-			<div class="desUrl">www.arena-media.co.uk/</div>
-			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+			<div class="videoTitle">[VIDEO] <span class="pageTitle"></div>
+			<div class="urlDesc"></div>
+			<div class="metaDesc"></div>
 		</div>
 		<div id="preview-other" name="all-previews" class="preview" style="display:none;">
-			<div class="desOtherTitle">[OTHER] <span class="desTitle">Arena Media - Partners for Now and Next</div>
-			<div class="desUrl">www.arena-media.co.uk/</div>
-			<div class="desDesc">Welcome to Arena Media. We help grow business by understanding how to change behaviour. We think about the present and future in equal measure - taking ...</div>
+			<div class="otherTitle">[OTHER] <span class="pageTitle"></div>
+			<div class="urlDesc"></div>
+			<div class="metaDesc"></div>
 		</div>
 	</div>
 </body>

@@ -1,65 +1,117 @@
-body{
-font-family: arial, sans-serif;
-color: #222;
-font-weight: normal;
-margin: 0;
-padding: 0;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: none;
+html, body, div, span, applet, object,
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img, ins,
+kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby, section,
+summary, time, mark, audio, video { 
+	margin: 0; 
+	padding: 0;
+	border: 0;
+	font-size: 100%; 
+	font: inherit; 
+	vertical-align: baseline; } 
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header,
+hgroup, menu, nav, section { 
+	display: block; 
+} 
+
+ol, ul {
+	list-style: none; 
+} 
+
+blockquote, q { 
+	quotes: none; 
+} 
+
+blockquote:before, 
+blockquote:after,
+q:before, 
+q:after { 
+	content: ''; 
+	content: none; 
+} 
+
+body {
+	
+	background-color:#f3f3f3;
+	font-family: Century Gothic, sans-serif;
+	font-size:12px;
+	line-height: 1; 
+	
 }
+
+#wrapper {
+	width:700px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:20px;
+	background-color:#fafafb;
+	padding:10px;
+	height:100%;
+}
+
+h1 {
+	font-size:25px;
+	padding-bottom:20px;
+	
+}
+
 #form{
-font-size: 16px;
+	margin: 10px 0px 30px 0px;
 }
-h1{
-font-size: 20px;
-font-weight: bold;
-margin: 10px 0px 20px 0px;
+
+.radioButtons{
+	margin-top: 20px;
 }
-.preview{
-display: inline-block;
-font-size: 13px;
-height: 68px;
-line-height: 15px;
-overflow-y: visible;
-position: relative;
-text-align: -webkit-auto;
-visibility: visible;
-margin-top: 40px;
-width: 600px;
+
+.preview {
+	background-color:#ffffff;
+	margin: 10px;
+	padding: 10px;
+	width:600px;
+	margin-left: auto;
+	margin-right: auto;
+	border-style:solid;
+	border-width: 2px;
+	border-color: #f3f3f3;
+	
 }
-.desTitle, .desPdfTitle, .desVideoTitle ,.desVideoTitle, .desOtherTitle{
-color: #12C;
-font-size: 16px;
-text-decoration: underline;
-height: 19px;
-line-height: 19px;
-overflow-x: hidden;
-overflow-y: hidden;
-text-align: -webkit-auto;
-text-overflow: ellipsis;
-visibility: visible;
-white-space: nowrap;
-width: 600px;
+
+.pageTitle {
+	font-family: arial,sans-serif; 
+	color: #1122CC;
+	font-size: medium; 
+	line-height: 1.2; 
+	text-decoration:underline; 
+} 
+	
+.urlDesc { 
+	max-width: 42em;
+	color: #009933; 
+	font-style: normal; 
+	font-size: small;
+	font-family: arial,sans-serif; 
+	text-decoration:none; 
+}  
+     
+.metaDesc { 
+	max-width: 42em;
+	font-family: arial,sans-serif; 
+	color: #222222;
+    font-size: small; 
+	line-height: 1.24; 
+	text-decoration:none; 
 }
-.desUrl{
-color: #093;
-font-size: 13px;
-font-style: normal;
-height: 15px;
-line-height: 15px;
-margin-bottom: 1px;
-overflow-y: visible;
-text-align: -webkit-auto;
-visibility: visible;
-width: 600px;
-}
-.desDesc{
-font-size: 13px;
-height: auto;
-line-height: 16px;
-overflow-y: visible;
-text-align: -webkit-auto;
-visibility: visible;
-width: auto;
-}
+
+/*.center_col { width: 528px; padding: 0 8px; margin-left:
+      132px; margin-right: 264px; } 
+	  
+.floatRight {
+	 float:right;
+	margin-right:200px;
+	margin-top:3px;
+}*/
