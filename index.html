@@ -4,30 +4,37 @@
 	<link rel="stylesheet" href="reset.css" type="text/css" />
 	<link rel="stylesheet" href="standard.css" type="text/css" />
 	<script type="text/javascript">
-		var titleLimit = 19;
-		var urlLimit = 50;
-		var descLimit = 159;
+		var limitsArray = {
+			title_limit:69, 
+			url_limit:50, 
+			desc_limit:159
+		};
 		function load(){
-			//set the maxlength on the field and then add the number next to it
-			//tile
-			document.getElementById('inpTitle').setAttribute('maxlength',titleLimit);
-			document.getElementById('title_limit').innerHTML=titleLimit;
-			//URL
-			document.getElementById('inpUrl').setAttribute('maxlength',urlLimit);
-			document.getElementById('url_limit').innerHTML=urlLimit;
-			//description
-			document.getElementById('inpDesc').setAttribute('maxlength',descLimit);
-			document.getElementById('desc_limit').innerHTML=descLimit;
+			//set the number next to the input fields by looping through limitsArray
+			for (key in limitsArray) {
+				document.getElementById(key).innerHTML=limitsArray[key];
+				}
 		}
 		function fieldChange(input, output, counter){
 			//find all elements with the same class and add them to a variable
 			var allTexts = document.getElementsByClassName(output);
-			//loop through the elements on the variable and change the text on the divs
+			//loop through the elements on the allTexts variable and change the text on the divs
+			var inputText = document.getElementById(input).value
 			for(var i=0; i< allTexts.length; i++){
-				allTexts[i].innerHTML = document.getElementById(input).value;
+				allTexts[i].innerHTML = inputText;
 			}
 			//update the counter field next to the input 
-			document.getElementById(counter).innerHTML = document.getElementById(input).getAttribute("maxlength") - document.getElementById(input).value.length;
+			document.getElementById(counter).innerHTML = limitsArray[counter] - document.getElementById(input).value.length;
+			if (document.getElementById(counter).innerHTML < 0){
+				//looks for the location of the first space from the limit backwards
+				var findSpace = inputText.lastIndexOf(' ',limitsArray[counter]);
+				// Create a new variable using the inputText but only from the begining until the location found. Apend to this 3 dots.
+				var newText = inputText.substr(0,findSpace)+ " ...";
+				//loop through the elements [AGAIN] on the allTexts variable and change the text on the divs to the newly created newText
+				for(var i=0; i< allTexts.length; i++){
+					allTexts[i].innerHTML = newText;
+				}
+			}
 		}
 		function changePreview(type){
 			//find all elements with the same name and add them to a variable

@@ -26,7 +26,7 @@ position: relative;
 text-align: -webkit-auto;
 visibility: visible;
 margin-top: 40px;
-width: 512px;
+width: 600px;
 }
 .desTitle, .desPdfTitle, .desVideoTitle ,.desVideoTitle, .desOtherTitle{
 color: #12C;
@@ -40,7 +40,7 @@ text-align: -webkit-auto;
 text-overflow: ellipsis;
 visibility: visible;
 white-space: nowrap;
-width: 512px;
+width: 600px;
 }
 .desUrl{
 color: #093;
@@ -52,7 +52,7 @@ margin-bottom: 1px;
 overflow-y: visible;
 text-align: -webkit-auto;
 visibility: visible;
-width: 181px;
+width: 600px;
 }
 .desDesc{
 font-size: 13px;
