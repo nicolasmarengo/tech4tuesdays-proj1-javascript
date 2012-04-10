@@ -3,6 +3,19 @@
 	<title>Testing Google SERPs</title>
 	<link rel="stylesheet" href="standard.css" type="text/css" />
 	<script type="text/javascript">
+		
+		// ========================================= //
+		// ==== NO IE or LOTUS NOTES NONSENSE ====== //
+		// ========================================= //
+		
+		var browserName = navigator.appName;
+		switch (browserName)
+		{
+		case "Microsoft Internet Explorer":
+		  alert("You are using Internet Explorer/Lotus Notes... Your are never going to succeed in life");
+		  document.write('<div id="badBrowser">Get a good browser, download <a href="https://www.google.com/chrome">Chrome</a>.</div>');
+		  break;
+		}
 	
 		// ========================================= //
 		// ======== CONFIG FOR STARTUP ============= //

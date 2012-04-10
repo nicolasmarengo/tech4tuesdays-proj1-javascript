@@ -44,6 +44,16 @@ body {
 	
 }
 
+#badBrowser {
+	
+	font-family: Century Gothic, sans-serif;
+	color: red;
+	font-size:15px;
+	line-height: 1; 
+	margin: 20px 0px 0px 20px;
+	
+}
+
 #wrapper {
 	width:700px;
 	margin-left: auto;
