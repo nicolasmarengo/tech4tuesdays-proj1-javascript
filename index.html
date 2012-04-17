@@ -54,6 +54,34 @@
 		// ============= Functions for on page changes =============== //
 		// =========================================================== //
 		
+		var constrainLength = function(string, maxlength, input) {		
+			if (string.length > maxlength && input != "inpUrl") {
+				//looks for the location of the first space from the limit backwards
+				var findSpaceLocation = string.lastIndexOf(' ',maxlength);	
+				// Create a new variable using the string but only from the begining until the location found. Apend to this 3 dots.
+				string = string.slice(0, findSpaceLocation) + " ...";
+				}
+			else{
+				//WHAT TO DO WITH THE URL???
+				}
+			return string;
+			};
+
+			
+		var boldKeyword = function(string, keyword) {
+			//case independent 
+			keyword = keyword.toLowerCase();
+			//cycle through the string characters
+				for (i = 0; i < string.length; i++) {
+				stringSlice = string.slice(i, i + keyword.length).toLowerCase();
+					if (stringSlice == keyword) {
+						string = string.slice(0, i) + string.slice(i, i + keyword.length).bold() + string.slice(i + keyword.length );
+						i+=4;
+						
+					}
+				}
+				return string;
+			};
 		/*
 			Input fields changing the text and counter on the side
 		*/
@@ -62,25 +90,18 @@
 			//find all elements with the same class and add them to a variable
 			var allTexts = document.getElementsByClassName(output);
 			//loop through the elements on the allTexts variable and change the text on the divs
-			var inputText = document.getElementById(input).value
+			var inputText = constrainLength(document.getElementById(input).value, limitsArray[counter], input);
+			//get the keyword field			
+			var keyword = document.getElementById("inpKey").value;
 			for(var i=0; i< allTexts.length; i++){
+				//If there is a keyword, run the boldKeyword function and modify inputText	
+				if (keyword.length > 0){
+				inputText = boldKeyword(inputText, keyword);
+				}
 				allTexts[i].innerHTML = inputText;
 			}
 			//update the counter field next to the input 
 			document.getElementById(counter).innerHTML = limitsArray[counter] - document.getElementById(input).value.length;
-			if (document.getElementById(counter).innerHTML < 0 && input != "inpUrl"){
-				//looks for the location of the first space from the limit backwards
-				var findSpaceLocation = inputText.lastIndexOf(' ',limitsArray[counter]);
-				// Create a new variable using the inputText but only from the begining until the location found. Apend to this 3 dots.
-				var newText = inputText.substr(0,findSpaceLocation)+ " ...";
-				//loop through the elements [AGAIN] on the allTexts variable and change the text on the divs to the newly created newText
-				for(var i=0; i< allTexts.length; i++){
-					allTexts[i].innerHTML = newText;
-				}
-			}
-			else{
-				//WHAT TO DO WITH THE URL???
-			}
 		}
 		
 		/*
@@ -97,12 +118,22 @@
 			//update the style of the chosen div thought the radio button so that it "re-appears"
 			document.getElementById('preview-'+type).setAttribute('style','display:block;');
 			//alert(type);
+		}		
+		
+		/*
+			Keyword input field changing
+		*/
+		
+		function keywordChange(){
+			fieldChange('inpTitle', 'pageTitle', 'title_limit');
+			fieldChange('inpUrl', 'urlDesc', 'url_limit');
+			fieldChange('inpDesc', 'metaDesc', 'desc_limit');
 		}
 	</script>
 </head>
 <body onload="load()">
 	<div id="wrapper">
-		<h1>Natural Search Copy Tool</h1>
+		<h1>Natural Search Copy Tool <font class="version">beta v1.0</font></h1>
 		<div id="form">
 			<form>
 				<div>
@@ -119,6 +150,11 @@
 					Meta Description:
 					<textarea onkeyup="fieldChange('inpDesc', 'metaDesc', 'desc_limit');" id="inpDesc" /></textarea>
 					(<span id="desc_limit"></span>)
+				</div>
+				<div>
+					Keyword:
+					<input type="text" onkeyup="keywordChange();" id="inpKey" />
+					<br />(This version only allows phrases to be bolded, no separate word bolding.)
 				</div>
 				<div class="radioButtons">
 					Choose a style:
