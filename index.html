@@ -92,12 +92,12 @@
 			//loop through the elements on the allTexts variable and change the text on the divs
 			var inputText = constrainLength(document.getElementById(input).value, limitsArray[counter], input);
 			//get the keyword field			
-			var keyword = document.getElementById("inpKey").value;
-			for(var i=0; i< allTexts.length; i++){
-				//If there is a keyword, run the boldKeyword function and modify inputText	
-				if (keyword.length > 0){
+			var keyword = document.getElementById("inpKey").value;				
+			//If there is a keyword, run the boldKeyword function and modify inputText	
+			if (keyword.length > 0){
 				inputText = boldKeyword(inputText, keyword);
-				}
+			}
+			for(var i=0; i< allTexts.length; i++){
 				allTexts[i].innerHTML = inputText;
 			}
 			//update the counter field next to the input 
